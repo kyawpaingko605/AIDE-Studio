@@ -1,5 +1,5 @@
 {
-  "v17": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/ndk_res/ndk_r17_arm.tar.gz",
-  "v17_x64": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/ndk_res/ndk_r17_arm64.tar.gz",
-  "v24": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/ndk_res/ndk_r24.tar.xz"
+  "v17": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/ndk_res/ndk_r17_arm.tar.gz",
+  "v17_x64": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/ndk_res/ndk_r17_arm64.tar.gz",
+  "v24": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/ndk_res/ndk_r24.tar.xz"
 }
