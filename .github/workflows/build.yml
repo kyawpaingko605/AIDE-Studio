@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # 💡 GitHub Built-in Token ကို သုံးပြီး ခွင့်ပြုချက်တောင်းမယ်
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Organize Open Source Codebase
@@ -29,11 +28,10 @@ jobs:
           cat configs/functions.json || echo "functions.json missing"
           cat configs/resources.json || echo "resources.json missing"
 
-      - name: Force Push Changes
+      - name: Push Changes back to Repository
         run: |
           git config --global user.name "kyawpaingko605"
           git config --global user.email "kyawpaingko605@users.noreply.github.com"
           git add .
           git commit --allow-empty -m "Automated Open Source Code Sync and Optimization"
-          # 💡 Token ကို သုံးပြီး HTTPS ကနေ အတင်း Push လုပ်ခိုင်းတဲ့နည်းလမ်းဖြစ်လို့ Permission အဟောင်းတွေကို ကျော်သွားပါလိမ့်မယ်
           git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/kyawpaingko605/AIDE-Studio.git" main
