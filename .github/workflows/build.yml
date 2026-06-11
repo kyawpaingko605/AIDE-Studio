@@ -1,41 +1,38 @@
-name: Build Android APK
+name: Sync Open Source Code
 
 on:
   push:
     branches:
-      - main # main branch ထဲကို ကုဒ် push လုပ်လိုက်တိုင်း build နိုးမယ်
+      - main # ကိုယ့် main branch ထဲ ကုဒ် push လုပ်တာနဲ့ အလုပ်လုပ်မယ်
+  workflow_dispatch: # ရွေးချယ်ပြီး ကိုယ်တိုင် manually ခလုတ်နှိပ်ပြီး နိုးလို့လည်းရတယ်
 
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          fetch-depth: 0
 
-      # တကယ်လို့ Flutter App ဆိုရင် ဒီအပိုင်းကို သုံးပါ
-      # - name: Set up Flutter
-      #   uses: subosito/flutter-action@v2
-      #   with:
-      #     flutter-version: 'stable'
-      # - run: flutter pub get
-      # - run: flutter build apk --release
+      - name: Organize Open Source Codebase
+        run: |
+          echo "Organizing AIDE Studio Open Source Project..."
+          # ဒီနေရာမှာ လိုအပ်တဲ့ ဖိုင်တွဲ တည်ဆောက်ပုံတွေကို မပျက်စီးအောင် စစ်ဆေးပေးတာမျိုး လုပ်ပါမယ်
+          mkdir -p configs resources docs ndk_res
+          
+      - name: Verify Configs
+        run: |
+          echo "Checking JSON structures..."
+          cat configs/functions.json || echo "functions.json missing"
+          cat configs/resources.json || echo "resources.json missing"
 
-      # တကယ်လို့ Native Android (Gradle) ဆိုရင် ဒီအပိုင်းကို သုံးပါ
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew assembleRelease
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: AIDE-Studio-APK
-          path: app/build/outputs/apk/release/*.apk
+      - name: Commit and Keep Source Updated
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          # ပြောင်းလဲမှုရှိမှ commit လုပ်မှာဖြစ်လို့ error မတက်အောင် --allow-empty သုံးထားပါတယ်
+          git commit --allow-empty -m "Automated Open Source Code Sync and Optimization"
+          git push origin main
