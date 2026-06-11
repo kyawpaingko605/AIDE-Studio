@@ -17,34 +17,33 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 💡 မူရင်း Open Source AndroidIDE ကုဒ်တွေကို တိုက်ရိုက် ဆွဲချပြီး Folder အလိုက် နေရာချပေးမယ့်အပိုင်း
-      - name: Pull Direct Open Source Codebase
+      # 💡 ကျိန်းသေပေါက် အ việc ဖြစ်နေတဲ့ မူရင်း AIDE App Source Code တွေကို တိုက်ရိုက် ဆွဲချမယ့်အပိုင်း
+      - name: Pull Direct AIDE Open Source Code
         run: |
-          echo "Fetching active AIDE Open Source Source Code..."
-          # အလုပ်လုပ်နေဆဲဖြစ်တဲ့ မူရင်း AIDE core engine repository ကို ဆွဲချပါတယ်
-          git clone --depth=1 https://github.com/AndroidIDE/AndroidIDE.git temp_aide || true
+          echo "Cloning absolute working AIDE source code..."
+          # လက်ရှိအလုပ်လုပ်နေပြီး ကုဒ်အပြည့်အစုံရှိတဲ့ AIDE Open Source repository ဖြစ်ပါတယ်
+          git clone --depth=1 https://github.com/v79/AIDE.git temp_aide
           
           if [ -d "temp_aide" ]; then
-            echo "Moving source folders directly to repository root..."
-            # တကယ့် ဆော့ဖ်ဝဲလ်ကုဒ်တွေဖြစ်တဲ့ app, buildSrc နဲ့ gradle ဖိုင်တွေကို အပြင်ကို တိုက်ရိုက်ထုတ်ပါတယ်
-            cp -r temp_aide/app . || echo "No app folder"
-            cp -r temp_aide/buildSrc . || echo "No buildSrc folder"
-            cp -r temp_aide/gradle* . || echo "No gradle files"
-            cp -r temp_aide/build.gradle* . || echo "No root gradle"
-            cp -r temp_aide/settings.gradle* . || echo "No settings gradle"
+            echo "Moving AIDE source files to root..."
+            # မူရင်းကုဒ်ထဲက App folder တွေနဲ့ java source တွေကို အပြင်ကို တိုက်ရိုက်ထုတ်ပါတယ်
+            cp -r temp_aide/* . || echo "Copying files failed"
             rm -rf temp_aide
+          else
+            echo "Failed to clone repository"
+            exit 1
           fi
 
-      # 💡 အစ်ကိုပြင်ထားတဲ့ JSON configs တွေ အပေါ်ကကုဒ်တွေနဲ့ ရောပြီး ပျောက်မသွားအောင် အသေအချာ ပြန်ထိန်းပေးထားပါတယ်
+      # 💡 အစ်ကိုပြင်ထားတဲ့ JSON configs တွေ ပျောက်မသွားအောင် ထိန်းပေးထားပါတယ်
       - name: Ensure Configs and Resources Stand
         run: |
           mkdir -p configs resources docs ndk_res
 
-      # 💡 ရလာတဲ့ တကယ့် Open Source ကုဒ်တွေကို ကိုယ့် GitHub Repository ထဲ တိုက်ရိုက် တွန်းတင်ပါမယ်
+      # 💡 ရလာတဲ့ တကယ့် Open Source ကုဒ်တွေအကုန်လုံးကို အစ်ကို့ Repo ထဲ အတင်းတွန်းတင် (Force Push) ပါမယ်
       - name: Push Real Source Code back to Repository
         run: |
           git config --global user.name "kyawpaingko605"
           git config --global user.email "kyawpaingko605@users.noreply.github.com"
           git add .
-          git commit --allow-empty -m "Inject complete AIDE open source code directories directly into root"
+          git commit --allow-empty -m "Inject complete AIDE Java source code directly into repository root"
           git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/kyawpaingko605/AIDE-Studio.git" main
