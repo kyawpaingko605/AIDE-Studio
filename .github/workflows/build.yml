@@ -6,10 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-# 💡 GitHub Actions Bot ကို ကုဒ်တွေ ပြန်ရေးခွင့် (Write Permission) ပေးရန် ၎င်းအပိုင်းကို ထည့်ထားပါတယ်
-permissions:
-  contents: write
-
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -19,6 +15,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # 💡 ဘော့တ်နေရာမှာ ကိုယ့်အကောင့် Token နဲ့ တိုက်ရိုက် Push လုပ်ခိုင်းတာဖြစ်လို့ Settings ပြင်စရာမလိုတော့ပါဘူး
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Organize Open Source Codebase
         run: |
@@ -31,10 +29,10 @@ jobs:
           cat configs/functions.json || echo "functions.json missing"
           cat configs/resources.json || echo "resources.json missing"
 
-      - name: Commit and Keep Source Updated
+      - name: Push Changes back to Repository
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "kyawpaingko605"
+          git config --global user.email "kyawpaingko605@users.noreply.github.com"
           git add .
           git commit --allow-empty -m "Automated Open Source Code Sync and Optimization"
-          git push origin main
+          git push https://x-token-auth:${{ secrets.GITHUB_TOKEN }}@github.com/kyawpaingko605/AIDE-Studio.git main
