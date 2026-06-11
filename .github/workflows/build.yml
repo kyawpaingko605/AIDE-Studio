@@ -17,21 +17,31 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # 💡 မူရင်း တကယ့် AndroidIDE / AIDE ရဲ့ Open Source ကုဒ်တွေကို ဆွဲချပြီး ကိုယ့်ဆီ ပေါင်းထည့်မယ့်အပိုင်း
+      - name: Fetch and Merge Real AIDE Source Code
+        run: |
+          echo "Cloning official open source components..."
+          # မူရင်း Open Source ကုဒ်တွေကို ယာယီဆွဲချပြီး ကိုယ့် Project ထဲ ပေါင်းထည့်ပါတယ်
+          git clone --depth=1 https://github.com/AndroidIDE/AndroidIDE.git temp_source || true
+          
+          if [ -d "temp_source" ]; then
+            echo "Merging codebases..."
+            # သက်ဆိုင်ရာ source code တွေကို လက်ရှိ repository ထဲ ကူးထည့်ပါတယ်
+            cp -r temp_source/app . || echo "No app directory"
+            cp -r temp_source/buildSrc . || echo "No buildSrc directory"
+            cp -r temp_source/gradle* . || echo "No gradle files"
+            rm -rf temp_source
+          fi
+
       - name: Organize Open Source Codebase
         run: |
-          echo "Organizing AIDE Studio Open Source Project..."
+          echo "Organizing configs and resources..."
           mkdir -p configs resources docs ndk_res
-          
-      - name: Verify Configs
-        run: |
-          echo "Checking JSON structures..."
-          cat configs/functions.json || echo "functions.json missing"
-          cat configs/resources.json || echo "resources.json missing"
 
-      - name: Push Changes back to Repository
+      - name: Push Codebase back to Repository
         run: |
           git config --global user.name "kyawpaingko605"
           git config --global user.email "kyawpaingko605@users.noreply.github.com"
           git add .
-          git commit --allow-empty -m "Automated Open Source Code Sync and Optimization"
+          git commit --allow-empty -m "Sync complete AIDE open source codebase with customized configs"
           git push "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/kyawpaingko605/AIDE-Studio.git" main
