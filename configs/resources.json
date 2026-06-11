@@ -2,26 +2,26 @@
   "code": 200,
   "data": {
     "apk": {
-      "functions": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/functions.json",
-      "icon": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/resources/images/icon.png",
-      "json2bean": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/json2bean.json"
+      "functions": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/functions.json",
+      "icon": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/resources/images/icon.png",
+      "json2bean": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/json2bean.json"
     },
     "docs": {
-      "android": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/docs/android.tar.gz",
-      "java": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/docs/java.tar.gz",
-      "phonegap": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/docs/phonegap.tar.gz"
+      "android": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/docs/android.tar.gz",
+      "java": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/docs/java.tar.gz",
+      "phonegap": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/docs/phonegap.tar.gz"
     },
-    "gradle": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/gradle.json",
+    "gradle": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/gradle.json",
     "ndk": {
       "default": {
-        "v17": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/ndk.json",
-        "v17_x64": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/ndk.json",
-        "v24": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/ndk.json"
+        "v17": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/ndk.json",
+        "v17_x64": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/ndk.json",
+        "v24": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/ndk.json"
       },
       "gradle": {
-        "v17": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/gradle.json",
-        "v21": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/gradle.json",
-        "v24": "https://raw.githubusercontent.com/Goxome/AIDE-Studio/main/configs/gradle.json"
+        "v17": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/gradle.json",
+        "v21": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/gradle.json",
+        "v24": "https://raw.githubusercontent.com/kyawpaingko605/AIDE-Studio/main/configs/gradle.json"
       }
     }
   },
