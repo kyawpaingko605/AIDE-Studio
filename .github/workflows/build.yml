@@ -3,8 +3,12 @@ name: Sync Open Source Code
 on:
   push:
     branches:
-      - main # ကိုယ့် main branch ထဲ ကုဒ် push လုပ်တာနဲ့ အလုပ်လုပ်မယ်
-  workflow_dispatch: # ရွေးချယ်ပြီး ကိုယ်တိုင် manually ခလုတ်နှိပ်ပြီး နိုးလို့လည်းရတယ်
+      - main
+  workflow_dispatch:
+
+# 💡 GitHub Actions Bot ကို ကုဒ်တွေ ပြန်ရေးခွင့် (Write Permission) ပေးရန် ၎င်းအပိုင်းကို ထည့်ထားပါတယ်
+permissions:
+  contents: write
 
 jobs:
   sync:
@@ -19,7 +23,6 @@ jobs:
       - name: Organize Open Source Codebase
         run: |
           echo "Organizing AIDE Studio Open Source Project..."
-          # ဒီနေရာမှာ လိုအပ်တဲ့ ဖိုင်တွဲ တည်ဆောက်ပုံတွေကို မပျက်စီးအောင် စစ်ဆေးပေးတာမျိုး လုပ်ပါမယ်
           mkdir -p configs resources docs ndk_res
           
       - name: Verify Configs
@@ -33,6 +36,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
-          # ပြောင်းလဲမှုရှိမှ commit လုပ်မှာဖြစ်လို့ error မတက်အောင် --allow-empty သုံးထားပါတယ်
           git commit --allow-empty -m "Automated Open Source Code Sync and Optimization"
           git push origin main
